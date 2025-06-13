@@ -1,0 +1,39 @@
+{
+  "note": "config the console output and loaders here!",
+  "console": {
+    "success": "blue",
+    "error": "red",
+    "warn": "yellow",
+    "available": "blue, red, yellow, white, green, blueBright",
+    "editNames": {
+      "success": "Sakibin",
+      "error": "error",
+      "warn": "warn"
+    }
+  },
+
+  "DESIGN": {
+    "Title": "BotPack",
+    "Theme": "Ghost",
+    "Admin": "Sakibin",
+    "Setup": {
+      "Info": "plugin your favorite theme",
+      "Theme": "Customize your console effortlessly with various theme colors. Explore Aqua, Fiery, Blue, Orange, Pink, Red, Retro, Sunlight, Teen, Summer, Flower, Ghost, Purple, Rainbow, and Hacker themes to enhance your terminal logs."
+    }
+  },
+  
+  "logger": {
+    "colors": {
+      "cmdStarter": "blue",
+      "evntStarter": "blue",
+      "cmdLoader": "blue",
+      "evntLoader": "blue"
+    },
+    "strings": {
+      "cmdStarter": "●──INSTALLING MODULES──●",
+      "evntStarter": "●──INSTALLING EVENTS──●",
+      "cmdLoader": "[SAKIBIN]",
+      "evntLoader": "[EVENT]"
+    }
+  }
+}

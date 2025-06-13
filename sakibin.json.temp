@@ -1,0 +1,37 @@
+{
+    "author": "sakibin",
+    "userName": "Hussain",
+    "key": "FZL4567",
+    "developermode": false,
+    "language": "en",
+    "approval": false,
+    "premium": false,
+    "BOTNAME": "Miuki",
+    "EMAIL": "xakibin@gmail.com",
+    "PREFIX": "/",
+    "BOTOWNER": "Sakibin",
+    "OPERATOR": [
+        "100065445284007",
+        "100041336504284",
+        "100094264778217",
+        "100078920677107",
+        "100083289819306"
+    ],
+    "ADMINBOT": [
+        "100078920677107",
+        "100065445284007",
+        "100074722578899",
+        "61566349508273"
+    ],
+    "reactUnsend": [
+        "😡",
+        "😾",
+        "👎",
+        "😠"
+    ],
+    "ApiUrl": "https://xakibin-fs8d.onrender.com",
+    "ApiUrlX": "https://gpt-19zs.onrender.com",
+    "disabledcmds": [],
+    "disabledevents": [],
+    "note": "make sure that the bot name you entered is all lowercase"
+}

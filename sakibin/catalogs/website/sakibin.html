@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sakibin Control Panel</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<!-- UI Panel for Editing ONLY appstate in sakibinstate.json -->
+<div class="bot-config-card">
+  <h2>Update App State</h2>
+  <form id="configForm" onsubmit="saveAppState(); return false;">
+    <label for="appstate">App State</label>
+    <textarea name="appstate" id="appstate" rows="8" placeholder="Paste your appstate JSON here"></textarea>
+    <button type="submit">Save & Restart</button>
+    <div id="configStatus"></div>
+  </form>
+</div>
+
+<style>
+  body {
+    background: #0e111b;
+    margin: 0;
+    padding: 0;
+  }
+
+  .bot-config-card {
+    max-width: 420px;
+    margin: 40px auto 0 auto;
+    padding: 32px 28px 24px 28px;
+    background: rgba(20, 23, 37, 0.95);
+    border-radius: 18px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.14), 0 1.5px 8px rgba(0, 0, 0, 0.11);
+    color: #f7f7fa;
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    font-size: 16px;
+  }
+
+  .bot-config-card h2 {
+    margin-top: 0;
+    font-size: 1.35rem;
+    letter-spacing: 1px;
+    color: #72a7ff;
+    text-align: center;
+  }
+
+  .bot-config-card label {
+    display: block;
+    margin-top: 18px;
+    margin-bottom: 6px;
+    font-size: 0.98rem;
+    color: #e0e7ef;
+    font-weight: 500;
+  }
+
+  .bot-config-card textarea {
+    width: 100%;
+    padding: 9px 11px;
+    border-radius: 7px;
+    border: 1px solid #26314d;
+    background: #181e32;
+    color: #def;
+    font-size: 1rem;
+    transition: border-color .2s;
+    margin-bottom: 3px;
+    resize: vertical;
+    box-sizing: border-box;
+  }
+
+  .bot-config-card textarea:focus {
+    outline: none;
+    border-color: #72a7ff;
+    background: #212c4b;
+  }
+
+  .bot-config-card button[type="submit"] {
+    margin-top: 22px;
+    width: 100%;
+    background: linear-gradient(90deg, #3756e2, #5a7fff);
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 7px;
+    padding: 12px 0;
+    font-size: 1.07rem;
+    cursor: pointer;
+    transition: background 0.18s;
+  }
+
+  .bot-config-card button[type="submit"]:hover {
+    background: linear-gradient(90deg, #263ba8, #4a64d6);
+  }
+
+  #configStatus {
+    margin-top: 16px;
+    font-size: 0.98rem;
+    color: #e8e8ef;
+    text-align: center;
+    min-height: 1.2em;
+  }
+</style>
+
+<script>
+  async function saveAppState() {
+    const textarea = document.getElementById("appstate");
+    const status = document.getElementById("configStatus");
+    let json;
+
+    try {
+      json = JSON.parse(textarea.value);
+    } catch (err) {
+      status.style.color = "#f55";
+      status.textContent = "Invalid JSON format.";
+      return;
+    }
+
+    status.textContent = "Saving...";
+    status.style.color = "#ccc";
+
+    try {
+      const response = await fetch("/update-appstate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(json)
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        status.style.color = "#79ffae";
+        status.textContent = data.message || "Saved and restarting bot.";
+      } else {
+        status.style.color = "#f55";
+        status.textContent = data.error || "Failed to save.";
+      }
+    } catch (err) {
+      status.style.color = "#f55";
+      status.textContent = "Network error or server not responding.";
+    }
+  }
+</script>
+
+</body>
+</html>
